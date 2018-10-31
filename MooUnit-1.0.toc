@@ -1,0 +1,16 @@
+## Interface: 80000
+## Version: @project-version@
+
+## Title: MooUnit-1.0
+## Notes: Library to provide mappings between GUIDs, unit IDs, and names.
+
+## Author: Johnny C. Lam
+## X-Category: Library
+## X-License: BSD License
+## X-Website: https://github.com/ultijlam/moounit-1-0
+## X-Curse-Project-ID: 306109
+
+## OptionalDependencies: LibStub, CallbackHandler-1.0
+
+embeds.xml
+MooUnit-1.0.xml
