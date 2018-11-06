@@ -9,6 +9,7 @@
 ## X-License: BSD License
 ## X-Website: https://github.com/ultijlam/moounit-1-0
 ## X-Curse-Project-ID: 306109
+## X-WoWI-ID: 24853
 
 ## OptionalDependencies: LibStub, CallbackHandler-1.0
 
