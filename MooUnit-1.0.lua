@@ -303,9 +303,6 @@ local eventfulUnits = {}
 do
 	tinsert(eventfulUnits, "player")
 	tinsert(eventfulUnits, "pet")
-	tinsert(eventfulUnits, "vehicle")
-	tinsert(eventfulUnits, "target")
-	tinsert(eventfulUnits, "focus")
 	for i = 1, MAX_RAID_MEMBERS do
 		local unit = "raid" .. i
 		local petUnit = lib:GetPetUnitByUnit(unit)
@@ -328,6 +325,9 @@ do
 		tinsert(eventfulUnits, unit)
 		tinsert(eventfulUnits, petUnit)
 	end
+	tinsert(eventfulUnits, "vehicle")
+	tinsert(eventfulUnits, "target")
+	tinsert(eventfulUnits, "focus")
 end
 local numUnits = #eventfulUnits
 
