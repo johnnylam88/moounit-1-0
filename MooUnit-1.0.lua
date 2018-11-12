@@ -720,7 +720,7 @@ end
 
 function eventFrame:UNIT_TARGET(event, unit)
 	-- Changes to the player's target are tracked with PLAYER_TARGET_CHANGED.
-	if not UnitIsUnit("player", unit) then
+	if unit ~= "player" and not UnitIsUnit("player", unit) then
 		debug(3, event, unit)
 		local targetUnit = lib:GetTargetUnitByUnit(unit)
 		AddChildUnit(unit, targetUnit)
