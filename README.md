@@ -38,7 +38,7 @@ Returns whether the unit ID receives unit events, e.g., `UNIT_AURA`, `UNIT_TARGE
 
 #### Arguments:
 
-* `unit` - [unitID][]: `"player"`, `"target"`, `"raid15"`, etc.
+* `unit` - string: [unit ID], e.g., `"player"`, `"party1"`, `"raid15"`, etc.
 
 #### Returns:
 
@@ -52,11 +52,11 @@ Returns the GUID currently associated with the unit.
 
 #### Arguments:
 
-* `unit` - [unitID][]: `"player"`, `"target"`, `"raid15"`, etc.
+* `unit` - string: [unit ID], e.g., `"player"`, `"party1"`, `"raid15"`, etc.
 
 #### Returns:
 
-* `guid` - [GUID][]: the GUID of the unit
+* `guid` - string: [GUID][] of the unit
 
 ### GetUnitByGUID
 
@@ -66,11 +66,11 @@ Returns a list of units currently associated with the GUID.
 
 #### Arguments:
 
-* `guid` - [GUID][]
+* `guid` - string: [GUID][]
 
 #### Returns:
 
-* `unit1, unit2, ..., unitN` - list of [unitID][]: variable-length list of unit IDs
+* `unit1, unit2, ..., unitN` - list of strings: variable-length list of [unit ID][] strings
 
 ### GetNameByUnit
 
@@ -80,7 +80,7 @@ Returns the name currently associated with the unit.
 
 #### Arguments:
 
-* `unit` - [unitID][]: `"player"`, `"target"`, `"raid15"`, etc.
+* `unit` - string: [unit ID], e.g., `"player"`, `"party1"`, `"raid15"`, etc.
 
 #### Returns:
 
@@ -98,7 +98,7 @@ Returns a list of units currently associated with the name.
 
 #### Returns:
 
-* `unit1, unit2, ..., unitN` - list of [unitID][]: variable-length list of unit IDs
+* `unit1, unit2, ..., unitN` - list of strings: variable-length list of [unit ID][] strings
 
 ### GetNameByGUID
 
@@ -108,7 +108,7 @@ Returns the name currently associated with the GUID.
 
 #### Arguments:
 
-* `guid` - [GUID][]
+* `guid` - string: [GUID][]
 
 #### Returns:
 
@@ -126,7 +126,7 @@ Returns a list of GUIDs currently associated with the name.
 
 #### Returns:
 
-* `guid1, guid2, ..., guidN` - list of [GUID][]: variable-length list of GUIDs
+* `guid1, guid2, ..., guidN` - list of strings: variable-length list of [GUID][] strings
 
 ### GetPetUnitByUnit
 
@@ -136,11 +136,11 @@ Returns the unit ID assigned to the pet for the unit, even if the pet does not e
 
 #### Arguments:
 
-* `unit` - [unitID][]: `"player"`, `"party1"`, `"raid15"`, etc.
+* `unit` - string: [unit ID], e.g., `"player"`, `"party1"`, `"raid15"`, etc.
 
 #### Returns:
 
-* `petUnit` - [unitID][]: `"pet"`, `"partypet1"`, `"raidpet15"`, etc.
+* `petUnit` - string: [unit ID], e.g., `"pet"`, `"partypet1"`, `"raidpet15"`, etc.
 
 ### GetOwnerByGUID
 
@@ -150,11 +150,11 @@ Returns the GUID of the owner of the pet or vehicle GUID if both are on the grou
 
 #### Arguments:
 
-* `guid` - [GUID][]: pet or vehicle GUID
+* `guid` - string: [GUID][] of the pet or vehicle
 
 #### Returns:
 
-* `ownerGUID` - [GUID][]: GUID of owner.
+* `ownerGUID` - string: [GUID][] of the owner
 
 ### GetTargetUnitByUnit
 
@@ -164,11 +164,11 @@ Returns the unit ID assigned to the target for the unit, even if the target does
 
 #### Arguments:
 
-* `unit` - [unitID][]: `"player"`, `"party1"`, `"raid15"`, etc.
+* `unit` - string: [unit ID], e.g., `"player"`, `"party1"`, `"raid15"`, etc.
 
 #### Returns:
 
-* `targetUnit` - [unitID][]: `"target"`, `"party1target"`, `"raid15target"`, etc.
+* `targetUnit` - string: [unit ID], e.g., `"target"`, `"party1target"`, `"raid15target"`, etc.
 
 ### IterateRoster
 
@@ -221,10 +221,10 @@ Fires when the pet associated with an owner has changed.  This can happen if a p
 
 #### Arguments:
 
-* `ownerGUID` - [GUID][]: the GUID of the pet owner
-* `ownerUnit` - [unitID][]: the unit ID of the pet owner
-* `petGUID` - [GUID][]: the GUID of the pet
-* `petUnit` - [unitID][]: the unit ID of the pet
+* `ownerGUID` - string: [GUID][] of the pet owner
+* `ownerUnit` - string: [unit ID][] of the pet owner
+* `petGUID` - string: [GUID][] of the pet
+* `petUnit` - string: [unit ID][] of the pet
 
 ### MooUnit_RosterUpdated
 
@@ -236,8 +236,8 @@ Fires when a unit that we are tracking has changed.
 
 #### Arguments:
 
-* `guid` - [GUID][]: the GUID associated with the unit ID
-* `unit` - [unitID][]
+* `guid` - string: [GUID][] associated with the unit ID
+* `unit` - string: [unit ID] of the unit that has changed
 * `name` - string: the current name associated with the unit ID.
 
 ### MooUnit_UnitJoined
@@ -246,8 +246,8 @@ Fires when a new member is added to the group roster.
 
 #### Arguments:
 
-* `guid` - [GUID][]: the GUID of the member that joined the group
-* `unit` - [unitID][]: the unit ID of the member that joined the group
+* `guid` - string: [GUID][] of the member that joined the group
+* `unit` - string: [unit ID][] of the member that joined the group
 
 ### MooUnit_UnitLeft
 
@@ -255,7 +255,7 @@ Fires when a member is removed from the group roster.
 
 #### Arguments:
 
-* `guid` - [GUID][]: the GUID of the member that left the group
+* `guid` - string: [GUID][] of the member that left the group
 
 
 License
@@ -271,4 +271,4 @@ Feedback
   [project]: https://www.github.com/ultijlam/moounit-1-0
   [project-issue-tracker]: https://github.com/ultijlam/moounit-1-0/issues
   [GUID]: https://wow.gamepedia.com/GUID
-  [unitID]: https://wow.gamepedia.com/UnitId
+  [unit ID]: https://wow.gamepedia.com/UnitId
