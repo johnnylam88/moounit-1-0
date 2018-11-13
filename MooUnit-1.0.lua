@@ -174,7 +174,7 @@ local nameByUnit = lib.nameByUnit or {} -- a unit ID has one name
 local unitByName = lib.unitByName or {} -- a name can have multiple unit IDs
 local nameByGUID = lib.nameByGUID or {} -- a GUID has one name
 local guidByName = lib.guidByName or {} -- a name can have multiple GUIDs
-local roster = lib.roster or {} -- roster[guid] is true if the GUID is on the group roster
+local roster = lib.roster or {} -- roster[guid] = unit if the GUID is on the group roster
 local ownerByGUID = lib.ownerByGUID or {} -- a GUID can have one owner
 
 lib.guidByUnit = guidByUnit
@@ -228,6 +228,11 @@ end
 -- Return the GUID of the owner of the given pet/vehicle GUID.
 function lib:GetOwnerByGUID(guid)
 	return ownerByGUID[guid]
+end
+
+-- Return true if the GUID is on the roster.
+function lib:UnitInGroup(guid)
+	return roster[guid] ~= nil
 end
 
 -- Return an iterator over the group roster that gives key-value pairs of guid and unit ID.

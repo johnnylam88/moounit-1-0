@@ -170,6 +170,20 @@ Returns the unit ID assigned to the target for the unit, even if the target does
 
 * `targetUnit` - string: [unit ID], e.g., `"target"`, `"party1target"`, `"raid15target"`, etc.
 
+### UnitInGroup
+
+Returns whether the GUID is on the group roster.
+
+    boolean = lib:UnitInGroup(guid)
+
+#### Arguments:
+
+* `guid` - string: [GUID][] to test group membership
+
+#### Returns:
+
+* `boolean` - boolean: `true` if the unit is on the group roster, or `false` otherwise
+
 ### IterateRoster
 
 Returns an iterator that gives key-value pairs of GUID and unit ID for members on the group roster.
