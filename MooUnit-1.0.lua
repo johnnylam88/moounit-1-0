@@ -550,7 +550,7 @@ end
 -- GLOBALS: UnitGUID
 -- GLOBALS: UnitName
 
-local function UpdateUnit(unit, guid)
+local function UpdateUnit(unit, guid, changed)
 	guid = guid or UnitGUID(unit)
 	local name, realm = UnitName(unit)
 	local oldGUID = guidByUnit[unit]
@@ -593,16 +593,20 @@ local function UpdateUnit(unit, guid)
 	end
 	if updated then
 		MapNameToGUID(name, guid)
-		debug(2, "MooUnit_UnitChanged", guid, unit, name)
-		callbacks:Fire("MooUnit_UnitChanged", guid, unit, name)
+		if changed and type(changed) == "table" then
+			changed[guid] = unit
+		else
+			debug(2, "MooUnit_UnitChanged", guid, unit, name)
+			callbacks:Fire("MooUnit_UnitChanged", guid, unit, name)
+		end
 	end
 end
 
-local function UpdateUnitWithTarget(unit, guid)
-	UpdateUnit(unit, guid)
+local function UpdateUnitWithTarget(unit, guid, changed)
+	UpdateUnit(unit, guid, changed)
 	local targetUnit = lib:GetTargetUnitByUnit(unit)
 	AddChildUnit(unit, targetUnit)
-	UpdateUnit(targetUnit)
+	UpdateUnit(targetUnit, nil, changed)
 end
 
 local partyUnits = {}
@@ -619,6 +623,7 @@ end
 
 local unitJoined = {}
 local unitLeft = {}
+local unitChanged = {}
 
 local function UpdateRosterUnit(unit)
 	local guid = UnitGUID(unit)
@@ -630,7 +635,7 @@ local function UpdateRosterUnit(unit)
 		end
 		roster[guid] = unit
 	end
-	UpdateUnitWithTarget(unit, guid)
+	UpdateUnitWithTarget(unit, guid, unitChanged)
 end
 
 local function UpdateRoster()
@@ -664,6 +669,13 @@ local function UpdateRoster()
 		local unit = roster[guid]
 		debug(2, "MooUnit_UnitJoined", guid, unit)
 		callbacks:Fire("MooUnit_UnitJoined", guid, unit)
+	end
+	for guid, unit in pairs(unitChanged) do
+		updated = true
+		unitChanged[guid] = nil
+		local name = nameByGUID[guid]
+		debug(2, "MooUnit_UnitChanged", guid, unit, name)
+		callbacks:Fire("MooUnit_UnitChanged", guid, unit, name)
 	end
 	if updated then
 		debug(2, "MooUnit_RosterUpdated")
