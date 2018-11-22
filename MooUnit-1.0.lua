@@ -236,7 +236,7 @@ function lib:IsGUIDInGroup(guid)
 end
 lib.UnitInGroup = lib.IsGUIDInGroup -- DEPRECATED: UnitInGroup
 
--- Return an iterator over the group roster that gives key-value pairs of guid and unit ID.
+-- Return an iterator over the group roster that gives key-value pairs of GUID and unit ID.
 function lib:IterateRoster()
 	return pairs(roster)
 end
