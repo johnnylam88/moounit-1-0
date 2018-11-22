@@ -231,9 +231,10 @@ function lib:GetOwnerByGUID(guid)
 end
 
 -- Return true if the GUID is on the roster.
-function lib:UnitInGroup(guid)
+function lib:IsGUIDInGroup(guid)
 	return roster[guid] ~= nil
 end
+lib.UnitInGroup = lib.IsGUIDInGroup -- DEPRECATED: UnitInGroup
 
 -- Return an iterator over the group roster that gives key-value pairs of guid and unit ID.
 function lib:IterateRoster()
