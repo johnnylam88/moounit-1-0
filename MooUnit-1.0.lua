@@ -175,7 +175,7 @@ local unitByName = lib.unitByName or {} -- a name can have multiple unit IDs
 local nameByGUID = lib.nameByGUID or {} -- a GUID has one name
 local guidByName = lib.guidByName or {} -- a name can have multiple GUIDs
 local roster = lib.roster or {} -- roster[guid] = unit if the GUID is on the group roster
-local ownerByGUID = lib.ownerByGUID or {} -- a GUID can have one owner
+local ownerGUIDByGUID = lib.ownerGUIDByGUID or lib.ownerByGUID or {} -- a GUID can have one owner
 
 lib.guidByUnit = guidByUnit
 lib.unitByGUID = unitByGUID
@@ -184,7 +184,8 @@ lib.unitByName = unitByName
 lib.nameByGUID = nameByGUID
 lib.guidByName = guidByName
 lib.roster = roster
-lib.ownerByGUID = ownerByGUID
+lib.ownerGUIDByGUID = ownerGUIDByGUID
+lib.ownerByGUID = ownerGUIDByGUID -- DEPRECATED: ownerByGUID
 
 -- Return the GUID of the given unit.
 function lib:GetGUIDByUnit(unit)
@@ -226,9 +227,10 @@ function lib:GetGUIDByName(name)
 end
 
 -- Return the GUID of the owner of the given pet/vehicle GUID.
-function lib:GetOwnerByGUID(guid)
-	return ownerByGUID[guid]
+function lib:GetOwnerGUIDByGUID(guid)
+	return ownerGUIDByGUID[guid]
 end
+lib.GetOwnerByGUID = lib.GetOwnerGUIDByGUID -- DEPRECATED: GetOwnerByGUID
 
 -- Return true if the GUID is on the roster.
 function lib:IsGUIDInGroup(guid)
@@ -492,7 +494,7 @@ local function UnmapGUIDToUnit(guid, unit)
 				if name then
 					UnmapNameToGUID(name, oldGUID)
 				end
-				ownerByGUID[oldGUID] = nil
+				ownerGUIDByGUID[oldGUID] = nil
 			end
 			mruGUIDs:PutNewestGUID(guid)
 		end
@@ -652,7 +654,7 @@ local function UpdateRoster()
 			UpdateRosterUnit(petUnit)
 			local petGUID = guidByUnit[petUnit]
 			if petGUID then
-				ownerByGUID[petGUID] = guidByUnit[unit]
+				ownerGUIDByGUID[petGUID] = guidByUnit[unit]
 			end
 		end
 	end
@@ -730,7 +732,7 @@ function eventFrame:UNIT_PET(event, unit)
 	local guid = guidByUnit[unit]
 	local petGUID = guidByUnit[petUnit]
 	if petGUID then
-		ownerByGUID[petGUID] = guid
+		ownerGUIDByGUID[petGUID] = guid
 		debug(2, "MooUnit_PetChanged", guid, unit, petGUID, petUnit)
 		callbacks:Fire("MooUnit_PetChanged", guid, unit, petGUID, petUnit)
 	end
