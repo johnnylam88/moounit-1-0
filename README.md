@@ -142,11 +142,11 @@ Returns the unit ID assigned to the pet for the unit, even if the pet does not e
 
 * `petUnit` - string: [unit ID], e.g., `"pet"`, `"partypet1"`, `"raidpet15"`, etc.
 
-### GetOwnerByGUID
+### GetOwnerGUIDByGUID
 
 Returns the GUID of the owner of the pet or vehicle GUID if both are on the group roster.
 
-    ownerGUID = lib:GetOwnerByGUID(guid)
+    ownerGUID = lib:GetOwnerGUIDByGUID(guid)
 
 #### Arguments:
 
@@ -170,11 +170,11 @@ Returns the unit ID assigned to the target for the unit, even if the target does
 
 * `targetUnit` - string: [unit ID], e.g., `"target"`, `"party1target"`, `"raid15target"`, etc.
 
-### UnitInGroup
+### IsGUIDInGroup
 
 Returns whether the GUID is on the group roster.
 
-    boolean = lib:UnitInGroup(guid)
+    boolean = lib:IsGUIDInGroup(guid)
 
 #### Arguments:
 
