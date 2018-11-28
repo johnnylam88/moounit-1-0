@@ -4,7 +4,7 @@
     See the file LICENSE.txt for copying permission.
 --]]--------------------------------------------------------------------
 
-local MAJOR, MINOR = "MooUnit-1.0", 4
+local MAJOR, MINOR = "MooUnit-1.0", 5
 assert(LibStub, MAJOR .. " requires LibStub")
 assert(LibStub("CallbackHandler-1.0", true), MAJOR .. " requires CallbackHandler-1.0")
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
