@@ -361,6 +361,41 @@ end
 
 ------------------------------------------------------------------------
 
+-- GLOBALS: IsInRaid
+-- GLOBALS: UnitExists
+
+-- Unit IDs for party and raid.
+do
+	local partyUnits = {}
+	local raidUnits = {}
+	do
+		tinsert(partyUnits, "player")
+		tinsert(partyUnits, "pet")
+		for i = 1, MAX_PARTY_MEMBERS do
+			local unit = "party" .. i
+			tinsert(partyUnits, unit)
+			-- Allow both partypetN and partyNpet.
+			tinsert(partyUnits, unit .. "pet")
+			tinsert(partyUnits, "partypet" .. i)
+		end
+		for i = 1, MAX_RAID_MEMBERS do
+			local unit = "raid" .. i
+			tinsert(raidUnits, unit)
+			-- Allow both raidpetN and raidNpet.
+			tinsert(raidUnits, unit .. "pet")
+			tinsert(raidUnits, "raidpet" .. i)
+		end
+	end
+
+	-- Return true if the unit exists and is a group unit ID.
+	function lib:IsGroupUnit(unit)
+		local units = IsInRaid() and raidUnits or partyUnits
+		return (units[unit] ~= nil) and UnitExists(unit)
+	end
+end
+
+------------------------------------------------------------------------
+
 -- Preserve mappings of units to child units across library upgrades.
 -- childrenByUnit[unit][childUnit] = true
 local childrenByUnit = lib.childrenByUnit or {}
@@ -612,6 +647,7 @@ local function UpdateUnitWithTarget(unit, guid, changed)
 	UpdateUnit(targetUnit, nil, changed)
 end
 
+-- Unit IDs for party and raid.
 local partyUnits = {}
 local raidUnits = {}
 do

@@ -184,6 +184,20 @@ Returns whether the GUID is on the group roster.
 
 * `boolean` - boolean: `true` if the unit is on the group roster, or `false` otherwise
 
+### IsGroupUnit
+
+Returns whether the unit ID exists and is a group unit ID, e.g., `"partypet1"`, `"raid15"`, etc.
+
+    boolean = lib:IsGroupUnit(unit)
+
+#### Arguments:
+
+* `unit` - string: [unit ID], e.g., `"player"`, `"party1"`, `"raid15"`, etc.
+
+#### Returns:
+
+* `boolean` - boolean: `true` if the unit exists and is a group unit ID, or `false` otherwise
+
 ### IterateRoster
 
 Returns an iterator that gives key-value pairs of GUID and unit ID for members on the group roster.
